@@ -1,4 +1,22 @@
 var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
+
+//Connect to the database created on mlab.com
+mongoose.connect('mongodb://nidhi-todo:test123@ds139322.mlab.com:39322/nidhi-todo');
+
+//create a schema - this is like a blueprint to our data representation
+var todoSchema = new mongoose.Schema({
+  item: String
+});
+
+//we should create a model to base that model on a schema (can use capital letter to differentiate)
+var Todo = mongoose.model('Todo', todoSchema);
+
+//to add an item into the database
+var itemA = Todo({item: 'sleep early'}).save(function(err){
+  if (err) throw err;
+  console.log('item added successfully');
+})
 
 
 // creating some dummy data in the server
